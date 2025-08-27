@@ -12,15 +12,49 @@ import 'package:digitalwalletpaytmcloneapp/Utils/common_grid_widget_view.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/lists_view.dart';
 import 'package:digitalwalletpaytmcloneapp/main.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  final BannerSliderController bannerSliderController =
-      Get.put(BannerSliderController());
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String userName = "Loading...";
+final BannerSliderController bannerSliderController = Get.put(BannerSliderController());
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  /// ✅ API से userName लाना
+  void fetchUserName() async {
+                print("Response:sagar");
+
+    try {
+      final response = await ApiService.get("/profile");
+            print("Response: $response");
+
+      final data = response.data;
+
+      setState(() {
+        userName = data["name"] ?? "Guest User"; 
+      });
+    } catch (e) {
+      print("Error fetching user profile: $e");
+      setState(() {
+        userName = "Guest User";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +64,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              /// TopContainer Widget View
               TopContainerWidgetView(),
-
-              /// MyDigiWallet Widget View
               BodyWidgetView(context),
             ],
           ),
-
-          /// TopContainer2 Widget View
           TopContainer2WidgetView(),
-
-          /// Bottom Image Widget View
-          // BottomImageWidgetView(),
         ],
       ),
     );
@@ -69,25 +95,15 @@ class HomeScreen extends StatelessWidget {
             },
             child: Image.asset(Images.homeTopProfileImage),
           ),
-          title: InkWell(
-            onTap: () {
-              Get.to(() => UserPaymentCodeScreen());
-            },
-            child: CommonTextWidget.InterMedium(
-              color: black171,
-              text: "Good Morning,",
-              fontSize: 12,
-            ),
+          title: CommonTextWidget.InterMedium(
+            color: black171,
+            text: "Good Morning,",
+            fontSize: 12,
           ),
-          subtitle: InkWell(
-            onTap: () {
-              Get.to(() => UserPaymentCodeScreen());
-            },
-            child: CommonTextWidget.InterBold(
-              color: black171,
-              text: "Hello John Doe",
-              fontSize: 20,
-            ),
+          subtitle: CommonTextWidget.InterBold(
+            color: black171,
+            text: "Hello $userName", // ✅ अब backend से aane wala naam
+            fontSize: 20,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
@@ -96,14 +112,14 @@ class HomeScreen extends StatelessWidget {
                 onTap: () {
                   Get.to(() => ScannerScreen());
                 },
-                child:SvgPicture.asset(Images.scanCodeIcon),
+                child: SvgPicture.asset(Images.scanCodeIcon),
               ),
               SizedBox(width: 20),
               InkWell(
                 onTap: () {
                   Get.to(() => SearchScreen());
                 },
-                child:SvgPicture.asset(Images.search),
+                child: SvgPicture.asset(Images.search),
               ),
             ],
           ),
