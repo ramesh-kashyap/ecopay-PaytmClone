@@ -7,10 +7,62 @@ import 'package:digitalwalletpaytmcloneapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/AuthScreens/login_screen.dart';
 
 class UserPaymentCodeScreen extends StatelessWidget {
-  UserPaymentCodeScreen({Key? key}) : super(key: key);
 
+  UserPaymentCodeScreen({Key? key}) : super(key: key);
+    Future<void> _confirmLogout(BuildContext context) async {
+    bool? confirm = await showDialog<bool>(
+  context: context,
+  barrierDismissible: false, // user must tap a button
+  builder: (context) => AlertDialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    
+    content: Text(
+      "Are you sure you want to logout?",
+      style: TextStyle(fontSize: 16),
+      textAlign: TextAlign.center,
+    ),
+    actionsAlignment: MainAxisAlignment.spaceEvenly,
+    actions: [
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey[300],
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          minimumSize: Size(100, 40),
+        ),
+        onPressed: () => Navigator.of(context).pop(false),
+        child: Text("Cancel"),
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          minimumSize: Size(100, 40),
+        ),
+        onPressed: () => Navigator.of(context).pop(true),
+        child: Text("Logout"),
+      ),
+    ],
+  ),
+);
+
+
+    if (confirm == true) {
+      await ApiService.removeToken(); // Remove saved token
+        Get.offAll(() => LogInScreen()); // Navigate to login screen
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,15 +184,36 @@ class UserPaymentCodeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 25),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: CommonTextWidget.InterRegular(
-                        color: greyA6A,
-                        text: "V 1.1.0",
-                        fontSize: 16,
-                      ),
+                   Padding(
+                    padding: EdgeInsets.only(bottom: 25, left: 25, right: 25),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                         onPressed: () => _confirmLogout(context),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: Text(
+                            "Logout",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        CommonTextWidget.InterRegular(
+                          color: greyA6A,
+                          text: "V 1.1.0",
+                          fontSize: 12,
+                        ),
+                      ],
                     ),
                   ),
                 ],

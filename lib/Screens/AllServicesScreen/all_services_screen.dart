@@ -18,7 +18,35 @@ class AllServicesScreen extends StatefulWidget {
 class _AllServicesScreenState extends State<AllServicesScreen> {
   int _selectedIndex = 0;
   final TextEditingController searchController = TextEditingController();
+List<Map<String, dynamic>> filteredServices = [];
 
+ @override
+void initState() {
+  super.initState();
+
+  // Properly cast original list
+  filteredServices = Lists.allServicesList
+      .map((e) => Map<String, dynamic>.from(e))
+      .toList();
+
+  // Listen to search input
+  searchController.addListener(() {
+    final query = searchController.text.toLowerCase();
+    setState(() {
+      filteredServices = Lists.allServicesList
+          .map((e) => Map<String, dynamic>.from(e))
+          .where((service) =>
+              service["text"].toString().toLowerCase().contains(query))
+          .toList();
+    });
+  });
+}
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,60 +373,62 @@ class _AllServicesScreenState extends State<AllServicesScreen> {
                 Expanded(
                   child: ScrollConfiguration(
                     behavior: MyBehavior(),
-                    child: SingleChildScrollView(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 5,
-                          childAspectRatio:
-                              MediaQuery.of(context).size.aspectRatio * 2 / 1.6,
-                        ),
-                        shrinkWrap: true,
-                        primary: false,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.symmetric(horizontal: 22),
-                        itemCount: Lists.allServicesList.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Container(
-                                height: 55,
-                                width: 55,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: white,
-                                      spreadRadius: 0,
-                                      offset: Offset(0, 0),
-                                      blurRadius: 12,
-                                    ),
-                                  ],
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(9),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(15),
-                                  child: index == 9
-                                      ? Image.asset(
-                                          Lists.allServicesList[index]["image"])
-                                      :SvgPicture.asset(
-                                          Lists.allServicesList[index]["image"],
-                                          color: Colors.green,
-                                        ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              CommonTextWidget.InterSemiBold(
-                                  color: black171,
-                                  text: Lists.allServicesList[index]["text"],
-                                  fontSize: 12,
-                                  textAlign: TextAlign.center),
-                            ],
-                          );
-                        },
-                      ),
+        child: SingleChildScrollView(
+  child: GridView.builder(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 4,
+      mainAxisSpacing: 15,
+      crossAxisSpacing: 5,
+      childAspectRatio:
+          MediaQuery.of(context).size.aspectRatio * 2 / 1.6,
+    ),
+    shrinkWrap: true,
+    primary: false,
+    physics: NeverScrollableScrollPhysics(),
+    padding: EdgeInsets.symmetric(horizontal: 22),
+    itemCount: filteredServices.length, // <-- use filteredServices
+    itemBuilder: (context, index) {
+      final service = filteredServices[index];
+      return Column(
+        children: [
+          Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: white,
+                  spreadRadius: 0,
+                  offset: Offset(0, 0),
+                  blurRadius: 12,
+                ),
+              ],
+              color: white,
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: service["image"].toString().endsWith(".png") 
+                  ? Image.asset(service["image"])
+                  : SvgPicture.asset(
+                      service["image"],
+                      color: Colors.green,
                     ),
+            ),
+          ),
+          SizedBox(height: 10),
+          CommonTextWidget.InterSemiBold(
+            color: black171,
+            text: service["text"],
+            fontSize: 12,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
+    },
+  ),
+),
+
                   ),
                 )
               ],

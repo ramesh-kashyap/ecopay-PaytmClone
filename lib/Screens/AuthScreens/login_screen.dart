@@ -95,12 +95,12 @@ if (data['status'] == true && data['token'] != null) {
       children: [
         Row(
           children: [
-            CommonTextWidget.InterBold(
-              text: "Login Account ",
-              color: black171,
-              fontSize: 20,
-            ),
-          SvgPicture.asset(Images.user),
+           CommonTextWidget.InterBold(
+          text: "EcoPay Wallet",   // <-- Your logo text
+          color: Colors.green,     // <-- Green color
+          fontSize: 25,
+        ),
+         
           ],
         ),
         InkWell(
@@ -162,7 +162,7 @@ if (data['status'] == true && data['token'] != null) {
         child: Icon(Icons.lock_outline), // Optional
         ),
         ),
-        SizedBox(height: 40),
+        SizedBox(height: 20),
         InkWell(
           onTap: () {
             Get.to(() => TroubleLoginScreen());
@@ -177,7 +177,7 @@ if (data['status'] == true && data['token'] != null) {
         ),
         SizedBox(height: 15),
         CommonButtonWidget.button(
-          text: "Submit",
+          text: "Login",
           buttonColor: Colors.green,
           // onTap: () {
           //   Get.bottomSheet(

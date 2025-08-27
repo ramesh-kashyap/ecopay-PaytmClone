@@ -8,10 +8,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   SearchScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
+  List<Map<String, dynamic>> filteredList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize filtered list with original data
+    filteredList = Lists.ticketBookingList
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+
+    // Listen to search input
+    searchController.addListener(() {
+      final query = searchController.text.toLowerCase();
+      setState(() {
+        filteredList = Lists.ticketBookingList
+            .map((e) => Map<String, dynamic>.from(e))
+            .where((item) =>
+                item["text"].toString().toLowerCase().contains(query))
+            .toList();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +82,7 @@ class SearchScreen extends StatelessWidget {
             child: CommonTextFieldWidget.TextFormField2(
               prefixIcon: Padding(
                 padding: EdgeInsets.all(15),
-                child:SvgPicture.asset(Images.search, color: Colors.green),
+                child: SvgPicture.asset(Images.search, color: Colors.green),
               ),
               keyboardType: TextInputType.text,
               hintText: "Search",
@@ -77,7 +110,7 @@ class SearchScreen extends StatelessWidget {
         SizedBox(height: 15),
         CommonGridWidget.grid(
           context,
-          Lists.ticketBookingList,
+          filteredList, // <-- Use filtered list here
           () {},
         ),
       ],
