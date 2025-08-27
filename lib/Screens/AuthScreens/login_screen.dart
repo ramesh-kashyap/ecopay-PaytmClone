@@ -78,7 +78,7 @@ if (data['status'] == true && data['token'] != null) {
 
             /// TextField Widget View
             TextFieldWidgetView(),
-            Spacer(),
+            
 
             /// BottomText Widget View
             BottomTextWidgetView(),
