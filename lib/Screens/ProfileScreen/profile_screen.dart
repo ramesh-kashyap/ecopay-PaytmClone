@@ -118,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  horizontalTitleGap: -8,
+                  horizontalTitleGap: 8,
                   leading:SvgPicture.asset(Images.digiWallet,color: Colors.green,),
                   title:  CommonTextWidget.InterBold(
                     text: "DigiWallet",
