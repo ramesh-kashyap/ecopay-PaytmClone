@@ -10,59 +10,94 @@ import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/AuthScreens/login_screen.dart';
 
-class UserPaymentCodeScreen extends StatelessWidget {
+class UserPaymentCodeScreen extends StatefulWidget {
+  const UserPaymentCodeScreen({Key? key}) : super(key: key);
 
-  UserPaymentCodeScreen({Key? key}) : super(key: key);
-    Future<void> _confirmLogout(BuildContext context) async {
+  @override
+  State<UserPaymentCodeScreen> createState() => _UserPaymentCodeScreenState();
+}
+
+class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
+  String userName = "Loading...";
+  String userEmail = "Loading...";
+  String userPhone = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserProfile();
+  }
+
+  /// ✅ API से user data लाना
+  void fetchUserProfile() async {
+    try {
+      final response = await ApiService.get("/profile");
+      print("Response: $response");
+
+      final data = response.data;
+
+      setState(() {
+        userName = data["name"] ?? "Guest User";
+        userEmail = data["email"] ?? "No Email";
+      });
+    } catch (e) {
+      print("Error fetching user profile: $e");
+      setState(() {
+        userName = "Guest User";
+        userEmail = "No Email";
+      });
+    }
+  }
+
+  Future<void> _confirmLogout(BuildContext context) async {
     bool? confirm = await showDialog<bool>(
-  context: context,
-  barrierDismissible: false, // user must tap a button
-  builder: (context) => AlertDialog(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    
-    content: Text(
-      "Are you sure you want to logout?",
-      style: TextStyle(fontSize: 16),
-      textAlign: TextAlign.center,
-    ),
-    actionsAlignment: MainAxisAlignment.spaceEvenly,
-    actions: [
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey[300],
-          foregroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          minimumSize: Size(100, 40),
+      context: context,
+      barrierDismissible: false, // user must tap a button
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
-        onPressed: () => Navigator.of(context).pop(false),
-        child: Text("Cancel"),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          minimumSize: Size(100, 40),
+        content: Text(
+          "Are you sure you want to logout?",
+          style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
         ),
-        onPressed: () => Navigator.of(context).pop(true),
-        child: Text("Logout"),
+        actionsAlignment: MainAxisAlignment.spaceEvenly,
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey[300],
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              minimumSize: Size(100, 40),
+            ),
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text("Cancel"),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              minimumSize: Size(100, 40),
+            ),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text("Logout"),
+          ),
+        ],
       ),
-    ],
-  ),
-);
-
+    );
 
     if (confirm == true) {
       await ApiService.removeToken(); // Remove saved token
-        Get.offAll(() => LogInScreen()); // Navigate to login screen
+      Get.offAll(() => LogInScreen()); // Navigate to login screen
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,21 +125,21 @@ class UserPaymentCodeScreen extends StatelessWidget {
                   children: [
                     CommonTextWidget.InterSemiBold(
                       color: black171,
-                      text: "John Doe",
+                      text: userName,
                       fontSize: 26,
                     ),
                     SizedBox(height: 4),
                     CommonTextWidget.InterRegular(
                       color: black171,
-                      text: "UPI ID: `1234567890@DigiWallet",
+                      text: "Email: $userEmail",
                       fontSize: 12,
                     ),
-                    SizedBox(height: 6),
-                    CommonTextWidget.InterRegular(
-                      color: black171,
-                      text: "DIgiwallet: 1234567890",
-                      fontSize: 12,
-                    ),
+                    // SizedBox(height: 6),
+                    // CommonTextWidget.InterRegular(
+                    //   color: black171,
+                    //   text: "Phone: $userPhone",
+                    //   fontSize: 12,
+                    // ),
                   ],
                 ),
                 InkWell(
@@ -147,7 +182,6 @@ class UserPaymentCodeScreen extends StatelessWidget {
                 ),
               ),
               child: Column(
-                // alignment: Alignment.bottomCenter,
                 children: [
                   Expanded(
                     child: ScrollConfiguration(
@@ -162,7 +196,7 @@ class UserPaymentCodeScreen extends StatelessWidget {
                             onTap: Lists.userQrCodeList[index]["onTap"],
                             child: ListTile(
                               contentPadding: EdgeInsets.zero,
-                              leading:SvgPicture.asset(
+                              leading: SvgPicture.asset(
                                 Lists.userQrCodeList[index]["image"],
                                 color: Colors.green,
                               ),
@@ -184,13 +218,13 @@ class UserPaymentCodeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.only(bottom: 25, left: 25, right: 25),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ElevatedButton(
-                         onPressed: () => _confirmLogout(context),
+                          onPressed: () => _confirmLogout(context),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                             minimumSize: Size(double.infinity, 50),
