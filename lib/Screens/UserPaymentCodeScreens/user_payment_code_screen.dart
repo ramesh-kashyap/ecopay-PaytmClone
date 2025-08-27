@@ -28,7 +28,6 @@ class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
     fetchUserProfile();
   }
 
-  /// ✅ API से user data लाना
   void fetchUserProfile() async {
     try {
       final response = await ApiService.get("/profile");
