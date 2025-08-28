@@ -183,7 +183,7 @@ class Images {
   static const peterson = "assets/images/peterson.png";
   static const jason2 = "assets/images/jason2.png";
   static const payRupieeImage = "assets/images/payRupieeImage.png";
-  static const userQrCodeImage = "assets/images/userQrCodeImage.png";
+  static const userQrCodeImage = "assets/images/farmer.png";
   static const profileImage = "assets/images/profileImage.png";
   static const helpRupieeImage = "assets/images/helpRupieeImage.png";
   static const helpDigiWalletImage = "assets/images/helpDigiWalletImage.png";

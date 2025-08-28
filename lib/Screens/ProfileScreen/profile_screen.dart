@@ -6,13 +6,50 @@ import 'package:digitalwalletpaytmcloneapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+
+  String userName = "Loading...";
+  String userEmail = "Loading...";
+  String userPhone = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserProfile();
+  }
+
+  void fetchUserProfile() async {
+    try {
+      final response = await ApiService.get("/profile");
+      print("Response: $response");
+
+      final data = response.data;
+      setState(() {
+        userName = data["name"] ?? "Guest User";
+        userEmail = data["email"] ?? "No Email";
+        userPhone = data["phone"] ?? "No Phone";
+      });
+    } catch (e) {
+      print("Error fetching user profile: $e");
+      setState(() {
+        userName = "Guest User";
+        userEmail = "No Email";
+        userPhone = "No Phone";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +82,11 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 10),
                 Center(
-                  child:
-                      Image.asset(Images.profileImage, height: 100, width: 100),
+                  child: Image.asset(Images.profileImage, height: 100, width: 100),
                 ),
                 SizedBox(height: 20),
+
+                // Name Field
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: CommonTextWidget.InterMedium(
@@ -60,10 +98,12 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 CommonTextFieldWidget.TextFormField3(
                   controller: nameController,
-                  hintText: "John Doe",
+                  hintText: userName,
                   keyboardType: TextInputType.name,
                 ),
                 SizedBox(height: 20),
+
+                // Email Field
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: CommonTextWidget.InterMedium(
@@ -75,18 +115,20 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 CommonTextFieldWidget.TextFormField3(
                   controller: emailController,
-                  hintText: "Johndoe@gmail.com",
+                  hintText: userEmail,
                   keyboardType: TextInputType.emailAddress,
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(15),
                     child: CommonTextWidget.InterMedium(
-                      text: "Edit",
+                      text: "",
                       fontSize: 14,
                       color: Colors.green,
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
+
+                // Phone Field
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: CommonTextWidget.InterMedium(
@@ -98,18 +140,20 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 CommonTextFieldWidget.TextFormField3(
                   controller: phoneController,
-                  hintText: "12345 67890",
+                  hintText: userPhone,
                   keyboardType: TextInputType.number,
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(15),
                     child: CommonTextWidget.InterMedium(
-                      text: "Update",
+                      text: "",
                       fontSize: 14,
                       color: Colors.green,
                     ),
                   ),
                 ),
                 SizedBox(height: 40),
+
+                // Payment Section
                 CommonTextWidget.InterBold(
                   text: "Payment Accounts Status",
                   fontSize: 18,
@@ -119,18 +163,18 @@ class ProfileScreen extends StatelessWidget {
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   horizontalTitleGap: 8,
-                  leading:SvgPicture.asset(Images.digiWallet,color: Colors.green,),
-                  title:  CommonTextWidget.InterBold(
+                  leading: SvgPicture.asset(Images.digiWallet, color: Colors.green),
+                  title: CommonTextWidget.InterBold(
                     text: "DigiWallet",
                     fontSize: 14,
                     color: black171,
                   ),
-                  subtitle:  CommonTextWidget.InterRegular(
+                  subtitle: CommonTextWidget.InterRegular(
                     text: "₹1,00,0000 Monthly Limit",
                     fontSize: 12,
                     color: grey757,
                   ),
-                  trailing:  CommonTextWidget.InterMedium(
+                  trailing: CommonTextWidget.InterMedium(
                     text: "Activate Now",
                     fontSize: 14,
                     color: Colors.green,

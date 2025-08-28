@@ -20,7 +20,7 @@ class UserPaymentCodeScreen extends StatefulWidget {
 class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
   String userName = "Loading...";
   String userEmail = "Loading...";
-  String userPhone = "Loading...";
+  String userId = "Loading...";
 
   @override
   void initState() {
@@ -38,12 +38,16 @@ class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
       setState(() {
         userName = data["name"] ?? "Guest User";
         userEmail = data["email"] ?? "No Email";
+        userId = data["username"] ?? "No userId";
+
       });
     } catch (e) {
       print("Error fetching user profile: $e");
       setState(() {
         userName = "Guest User";
         userEmail = "No Email";
+        userId = "No userId";
+
       });
     }
   }
@@ -124,7 +128,7 @@ class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
                   children: [
                     CommonTextWidget.InterSemiBold(
                       color: black171,
-                      text: userName,
+                      text: "$userName",
                       fontSize: 26,
                     ),
                     SizedBox(height: 4),
@@ -133,12 +137,12 @@ class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
                       text: "Email: $userEmail",
                       fontSize: 12,
                     ),
-                    // SizedBox(height: 6),
-                    // CommonTextWidget.InterRegular(
-                    //   color: black171,
-                    //   text: "Phone: $userPhone",
-                    //   fontSize: 12,
-                    // ),
+                    SizedBox(height: 6),
+                    CommonTextWidget.InterRegular(
+                      color: black171,
+                      text: "userId: $userId",
+                      fontSize: 12,
+                    ),
                   ],
                 ),
                 InkWell(
