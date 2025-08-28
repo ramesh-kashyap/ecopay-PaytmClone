@@ -1,12 +1,51 @@
 import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
-import 'package:digitalwalletpaytmcloneapp/Constants/font_family.dart';
 import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
+import 'package:digitalwalletpaytmcloneapp/Constants/font_family.dart';
 
-class MyQrCodeScreen extends StatelessWidget {
-  MyQrCodeScreen({Key? key}) : super(key: key);
+
+class MyQrCodeScreen extends StatefulWidget {
+  const MyQrCodeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MyQrCodeScreen> createState() => _MyQrCodeScreenState();
+}
+
+class _MyQrCodeScreenState extends State<MyQrCodeScreen> {
+  String userName = "Loading...";
+  String userEmail = "Loading...";
+  String userId = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserProfile();
+  }
+
+  void fetchUserProfile() async {
+    try {
+      final response = await ApiService.get("/profile");
+      print("Response: $response");
+
+      final data = response.data;
+
+      setState(() {
+        userName = data["name"] ?? "Guest User";
+        userEmail = data["email"] ?? "No Email";
+        userId = data["username"] ?? "No userId";
+      });
+    } catch (e) {
+      print("Error fetching user profile: $e");
+      setState(() {
+        userName = "Guest User";
+        userEmail = "No Email";
+        userId = "No userId";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +74,19 @@ class MyQrCodeScreen extends StatelessWidget {
             SizedBox(height: 20),
             CommonTextWidget.InterSemiBold(
               color: black171,
-              text: "John Doe",
+              text: userName, // ✅ API se aaya hua user name
               fontSize: 26,
             ),
             SizedBox(height: 4),
             CommonTextWidget.InterRegular(
               color: black171,
-              text: "UPI ID: `1234567890@DigiWallet",
+              text: "Email: $userEmail", // ✅ API se aaya hua email
               fontSize: 12,
             ),
             SizedBox(height: 6),
             CommonTextWidget.InterRegular(
               color: black171,
-              text: "DIgiwallet: 1234567890",
+              text: "UserId: $userId", // ✅ API se aaya hua userId
               fontSize: 12,
             ),
             SizedBox(height: 50),
