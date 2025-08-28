@@ -22,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   String userName = "Loading...";
   String userEmail = "Loading...";
-  String userPhone = "Loading...";
+  String userid = "Loading...";
 
   @override
   void initState() {
@@ -39,14 +39,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         userName = data["name"] ?? "Guest User";
         userEmail = data["email"] ?? "No Email";
-        userPhone = data["phone"] ?? "No Phone";
+        userid = data["username"] ?? "No userid";
       });
     } catch (e) {
       print("Error fetching user profile: $e");
       setState(() {
         userName = "Guest User";
         userEmail = "No Email";
-        userPhone = "No Phone";
+        userid = "userid";
       });
     }
   }
@@ -132,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: CommonTextWidget.InterMedium(
-                    text: "Phone No.",
+                    text: "User Id",
                     fontSize: 14,
                     color: black171,
                   ),
@@ -140,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 10),
                 CommonTextFieldWidget.TextFormField3(
                   controller: phoneController,
-                  hintText: userPhone,
+                  hintText: userid,
                   keyboardType: TextInputType.number,
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(15),
