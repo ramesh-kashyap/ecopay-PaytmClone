@@ -103,7 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: CommonTextWidget.InterBold(
             color: black171,
-            text: "Ticket Booking",
+            text: "All Services",
             fontSize: 18,
           ),
         ),

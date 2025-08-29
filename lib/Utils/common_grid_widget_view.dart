@@ -10,7 +10,7 @@ class CommonGridWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 20,
         crossAxisSpacing: 15,
-        childAspectRatio: MediaQuery.of(context).size.aspectRatio * 2/ 1.9,
+        childAspectRatio: MediaQuery.of(context).size.aspectRatio * 2/ 1.4,
       ),
       shrinkWrap: true,
       primary: false,

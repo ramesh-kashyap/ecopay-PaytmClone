@@ -64,7 +64,7 @@ class Lists {
     },
     {
       "image": Images.digitalWalletPostpaid,
-      "text": "EcoPay Wallet\nPostpaid",
+      "text": "Postpaid",
       "onTap": () {
         Get.to(() => DigiwalletPostPaidScreen());
       }

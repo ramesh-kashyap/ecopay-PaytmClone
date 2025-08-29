@@ -13,6 +13,8 @@ import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/lists_view.dart';
 import 'package:digitalwalletpaytmcloneapp/main.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/ReferAndEarnScreen/refer_and_earn_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/AllServicesScreen/all_services_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -131,7 +133,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
   /// TopContainer2 Widget View
   Widget TopContainer2WidgetView() {
     return Positioned(
-      top: 145,
+      top: 165,
       left: 20,
       right: 20,
       child: Container(
@@ -185,7 +187,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => ToSelfScreen());
+                  Get.to(() => ReferAndEarnScreen());
                 },
                 child: Column(
                   children: [
@@ -193,7 +195,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
                       color: Colors.green,),
                     CommonTextWidget.InterSemiBold(
                       color: black171,
-                      text: "To Self",
+                      text: "Refer",
                       fontSize: 12,
                     ),
                   ],
@@ -230,7 +232,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 60),
 
               /// MyDigiWallet Widget View
               Padding(
@@ -275,11 +277,17 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
                       text: "Recharge & Bill Payments",
                       fontSize: 18,
                     ),
-                    CommonTextWidget.InterBold(
-                      color: Colors.green,
-                      text: "View All",
-                      fontSize: 16,
-                    ),
+                    GestureDetector(
+        onTap: () {
+          // Navigate to your "View All" screen
+          Get.to(() => SearchScreen()); // or any screen you want
+        },
+        child: CommonTextWidget.InterBold(
+          color: Colors.green,
+          text: "View All",
+          fontSize: 16,
+        ),
+      ),
                   ],
                 ),
               ),
@@ -296,140 +304,140 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
               SizedBox(height: 15),
 
               /// LoanAndCreditCard Widget View
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterBold(
-                  color: black171,
-                  text: "Loan & Credit Cards",
-                  fontSize: 18,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterRegular(
-                  color: grey6A7,
-                  text: "Instant Approvals",
-                  fontSize: 12,
-                ),
-              ),
-              SizedBox(height: 8),
-              CommonGridWidget.grid(
-                context,
-                Lists.loanAndCreditCardList,
-                () {},
-              ),
-              SizedBox(height: 20),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterBold(
+              //     color: black171,
+              //     text: "Loan & Credit Cards",
+              //     fontSize: 18,
+              //   ),
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterRegular(
+              //     color: grey6A7,
+              //     text: "Instant Approvals",
+              //     fontSize: 12,
+              //   ),
+              // ),
+              // SizedBox(height: 8),
+              // CommonGridWidget.grid(
+              //   context,
+              //   Lists.loanAndCreditCardList,
+              //   () {},
+              // ),
+              // SizedBox(height: 20),
 
-              Divider(thickness: 1, color: greyE7E),
+              // Divider(thickness: 1, color: greyE7E),
 
-              SizedBox(height: 15),
-
-              /// TicketBooking Widget View
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterBold(
-                  color: black171,
-                  text: "Ticket Booking",
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 15),
-              CommonGridWidget.grid(
-                context,
-                Lists.ticketBookingList,
-                () {},
-              ),
-
-              SizedBox(height: 20),
-
-              /// Banner2 Widget View
-              Container(
-                height: 80,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(Images.banner2Image1),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
+              // SizedBox(height: 15),
 
               /// TicketBooking Widget View
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterBold(
-                  color: black171,
-                  text: "Invest & Trade in Stocks",
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 15),
-              CommonGridWidget.grid(
-                context,
-                Lists.investAndTradStockList,
-                () {},
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterBold(
+              //     color: black171,
+              //     text: "Ticket Booking",
+              //     fontSize: 18,
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // CommonGridWidget.grid(
+              //   context,
+              //   Lists.ticketBookingList,
+              //   () {},
+              // ),
 
-              SizedBox(height: 20),
+              // SizedBox(height: 20),
 
-              Divider(thickness: 1, color: greyE7E),
+              // /// Banner2 Widget View
+              // Container(
+              //   height: 80,
+              //   width: Get.width,
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //       image: AssetImage(Images.banner2Image1),
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+
+              // /// TicketBooking Widget View
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterBold(
+              //     color: black171,
+              //     text: "Invest & Trade in Stocks",
+              //     fontSize: 18,
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // CommonGridWidget.grid(
+              //   context,
+              //   Lists.investAndTradStockList,
+              //   () {},
+              // ),
+
+              // SizedBox(height: 20),
+
+              // Divider(thickness: 1, color: greyE7E),
 
               /// Insurance Widget View
-              Padding(
-                padding:
-                    EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonTextWidget.InterBold(
-                      color: black171,
-                      text: "Insurance",
-                      fontSize: 18,
-                    ),
-                    CommonTextWidget.InterBold(
-                      color: Colors.green,
-                      text: "View All",
-                      fontSize: 16,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15),
-              CommonGridWidget.grid(
-                context,
-                Lists.insuranceList,
-                () {},
-              ),
-              SizedBox(height: 20),
+              // Padding(
+              //   padding:
+              //       EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 15),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       CommonTextWidget.InterBold(
+              //         color: black171,
+              //         text: "Insurance",
+              //         fontSize: 18,
+              //       ),
+              //       CommonTextWidget.InterBold(
+              //         color: Colors.green,
+              //         text: "View All",
+              //         fontSize: 16,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // CommonGridWidget.grid(
+              //   context,
+              //   Lists.insuranceList,
+              //   () {},
+              // ),
+              // SizedBox(height: 20),
 
-              Divider(thickness: 1, color: greyE7E),
+              // Divider(thickness: 1, color: greyE7E),
 
-              SizedBox(height: 15),
+              // SizedBox(height: 15),
 
               /// FirstGamesByDigiWallet Widget View
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterBold(
-                  color: black171,
-                  text: "First Games by EcoPay WAllet",
-                  fontSize: 18,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterRegular(
-                  color: grey6A7,
-                  text: "Play & Win",
-                  fontSize: 12,
-                ),
-              ),
-              SizedBox(height: 12),
-              CommonGridWidget.grid1(
-                context,
-                Lists.firstGamesByDigiWalletList,
-                () {},
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterBold(
+              //     color: black171,
+              //     text: "First Games by EcoPay WAllet",
+              //     fontSize: 18,
+              //   ),
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterRegular(
+              //     color: grey6A7,
+              //     text: "Play & Win",
+              //     fontSize: 12,
+              //   ),
+              // ),
+              // SizedBox(height: 12),
+              // CommonGridWidget.grid1(
+              //   context,
+              //   Lists.firstGamesByDigiWalletList,
+              //   () {},
+              // ),
               SizedBox(height: 20),
 
               /// Banner3 Widget View
@@ -445,187 +453,187 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
               ),
 
               SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: CommonTextWidget.InterBold(
-                  color: black171,
-                  text: "Recommended",
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 15),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 140,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: whiteFDF,
-                          borderRadius: BorderRadius.circular(18),
-                          boxShadow: [
-                            BoxShadow(
-                              color: black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(Images.recommendedImage1,
-                                  height: 45, width: 45),
-                              SizedBox(height: 8),
-                              CommonTextWidget.InterMedium(
-                                color: black171,
-                                text: "Payein ₹3 Lakh "
-                                    "tak Loan. Pepay "
-                                    "in easy EMIs",
-                                fontSize: 10,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        height: 140,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: whiteFDF,
-                          borderRadius: BorderRadius.circular(18),
-                          boxShadow: [
-                            BoxShadow(
-                              color: black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(Images.recommendedImage2,
-                                  height: 45, width: 45),
-                              SizedBox(height: 8),
-                              CommonTextWidget.InterMedium(
-                                color: black171,
-                                text: "Refer & Earn :) "
-                                    "Get ₹100 "
-                                    "Cashback",
-                                fontSize: 10,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        height: 140,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: whiteFDF,
-                          borderRadius: BorderRadius.circular(18),
-                          boxShadow: [
-                            BoxShadow(
-                              color: black.withOpacity(0.1),
-                              blurRadius: 10,
-                              offset: Offset(0, 0),
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(Images.recommendedImage3,
-                                  height: 45, width: 45),
-                              SizedBox(height: 8),
-                              CommonTextWidget.InterMedium(
-                                color: black171,
-                                text: "Get ₹600 "
-                                    "Cashback on "
-                                    "Rent Payment",
-                                fontSize: 10,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.only(top: 30, left: 25, right: 25, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonTextWidget.InterBold(
-                      color: black171,
-                      text: "Discover with EcoPay Wallet",
-                      fontSize: 18,
-                    ),
-                    CommonTextWidget.InterBold(
-                      color: Colors.green,
-                      text: "View All",
-                      fontSize: 16,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15),
-              CommonGridWidget.grid2(
-                context,
-                Lists.discoverWithDigiWallet,
-                () {},
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: CommonTextWidget.InterBold(
+              //     color: black171,
+              //     text: "Recommended",
+              //     fontSize: 18,
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 25),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: Container(
+              //           height: 140,
+              //           width: Get.width,
+              //           decoration: BoxDecoration(
+              //             color: whiteFDF,
+              //             borderRadius: BorderRadius.circular(18),
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: black.withOpacity(0.1),
+              //                 blurRadius: 10,
+              //                 offset: Offset(0, 0),
+              //                 spreadRadius: 0,
+              //               ),
+              //             ],
+              //           ),
+              //           child: Padding(
+              //             padding: EdgeInsets.all(15),
+              //             child: Column(
+              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //               children: [
+              //                 Image.asset(Images.recommendedImage1,
+              //                     height: 45, width: 45),
+              //                 SizedBox(height: 8),
+              //                 CommonTextWidget.InterMedium(
+              //                   color: black171,
+              //                   text: "Payein ₹3 Lakh "
+              //                       "tak Loan. Pepay "
+              //                       "in easy EMIs",
+              //                   fontSize: 10,
+              //                   textAlign: TextAlign.center,
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       SizedBox(width: 10),
+              //       Expanded(
+              //         child: Container(
+              //           height: 140,
+              //           width: Get.width,
+              //           decoration: BoxDecoration(
+              //             color: whiteFDF,
+              //             borderRadius: BorderRadius.circular(18),
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: black.withOpacity(0.1),
+              //                 blurRadius: 10,
+              //                 offset: Offset(0, 0),
+              //                 spreadRadius: 0,
+              //               ),
+              //             ],
+              //           ),
+              //           child: Padding(
+              //             padding: EdgeInsets.all(15),
+              //             child: Column(
+              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //               children: [
+              //                 Image.asset(Images.recommendedImage2,
+              //                     height: 45, width: 45),
+              //                 SizedBox(height: 8),
+              //                 CommonTextWidget.InterMedium(
+              //                   color: black171,
+              //                   text: "Refer & Earn :) "
+              //                       "Get ₹100 "
+              //                       "Cashback",
+              //                   fontSize: 10,
+              //                   textAlign: TextAlign.center,
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       SizedBox(width: 10),
+              //       Expanded(
+              //         child: Container(
+              //           height: 140,
+              //           width: Get.width,
+              //           decoration: BoxDecoration(
+              //             color: whiteFDF,
+              //             borderRadius: BorderRadius.circular(18),
+              //             boxShadow: [
+              //               BoxShadow(
+              //                 color: black.withOpacity(0.1),
+              //                 blurRadius: 10,
+              //                 offset: Offset(0, 0),
+              //                 spreadRadius: 0,
+              //               ),
+              //             ],
+              //           ),
+              //           child: Padding(
+              //             padding: EdgeInsets.all(15),
+              //             child: Column(
+              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //               children: [
+              //                 Image.asset(Images.recommendedImage3,
+              //                     height: 45, width: 45),
+              //                 SizedBox(height: 8),
+              //                 CommonTextWidget.InterMedium(
+              //                   color: black171,
+              //                   text: "Get ₹600 "
+              //                       "Cashback on "
+              //                       "Rent Payment",
+              //                   fontSize: 10,
+              //                   textAlign: TextAlign.center,
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // Padding(
+              //   padding:
+              //       EdgeInsets.only(top: 30, left: 25, right: 25, bottom: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       CommonTextWidget.InterBold(
+              //         color: black171,
+              //         text: "Discover with EcoPay Wallet",
+              //         fontSize: 18,
+              //       ),
+              //       CommonTextWidget.InterBold(
+              //         color: Colors.green,
+              //         text: "View All",
+              //         fontSize: 16,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // CommonGridWidget.grid2(
+              //   context,
+              //   Lists.discoverWithDigiWallet,
+              //   () {},
+              // ),
 
               /// DigiWalletHealth Widget View
-              Padding(
-                padding:
-                    EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonTextWidget.InterBold(
-                      color: black171,
-                      text: "EcoPay Health",
-                      fontSize: 18,
-                    ),
-                    CommonTextWidget.InterBold(
-                      color: Colors.green,
-                      text: "View All",
-                      fontSize: 16,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15),
-              CommonGridWidget.grid(
-                context,
-                Lists.digiWalletHealthList,
-                () {},
-              ),
+              // Padding(
+              //   padding:
+              //       EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 15),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       CommonTextWidget.InterBold(
+              //         color: black171,
+              //         text: "EcoPay Health",
+              //         fontSize: 18,
+              //       ),
+              //       CommonTextWidget.InterBold(
+              //         color: Colors.green,
+              //         text: "View All",
+              //         fontSize: 16,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(height: 15),
+              // CommonGridWidget.grid(
+              //   context,
+              //   Lists.digiWalletHealthList,
+              //   () {},
+              // ),
 
               /// List Widget View
               ListWidgetView(),
@@ -772,7 +780,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
           ),
           SizedBox(height: 25),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {Get.to(() => ReferAndEarnScreen());},
             height: 30,
             minWidth: 65,
             shape: RoundedRectangleBorder(
