@@ -31,6 +31,9 @@ import 'package:digitalwalletpaytmcloneapp/Screens/ReferAndEarnScreen/refer_and_
 import 'package:digitalwalletpaytmcloneapp/Screens/TermsConditionsAndPrivacyPolicyScreens/Policies_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/SearchScreen/search_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/ScannerScreen/scanner_screen.dart';
+
 
 class Lists {
   static List<Map> myDigiWalletList = [
@@ -43,21 +46,21 @@ class Lists {
     },
     {
       "image": Images.wallet,
-      "text": "EcoPay Wallet",
+      "text": "Housing Society",
       "onTap": () {
         Get.to(() => DigiWalletProfileUpdateScreen());
       }
     },
     {
       "image": Images.carInsurance,
-      "text": "Car \nInsurance",
+      "text": "Insurance\nService",
       "onTap": () {
         Get.to(() => CarInsuranceScreen());
       }
     },
     {
       "image": Images.personalLoan,
-      "text": "Personal\nLoan",
+      "text": "Loan\nRepayment",
       "onTap": () {
         Get.to(() => PersonalLoanScreen());
       }
@@ -78,7 +81,7 @@ class Lists {
     },
     {
       "image": Images.movieTickets,
-      "text": "Movie\nTickets",
+      "text": "Water\nService",
       "onTap": () {
         Get.to(() => MovieTicketScreen());
       }
@@ -87,7 +90,7 @@ class Lists {
       "image": Images.allServices,
       "text": "All Services",
       "onTap": () {
-        Get.to(() => AllServicesScreen());
+        Get.to(() => SearchScreen());
       }
     },
   ];
@@ -108,11 +111,11 @@ class Lists {
     },
     {
       "image": Images.rentViaCreditCard,
-      "text": "Rent via\nCredit Card",
+      "text": "Cable TV",
     },
     {
       "image": Images.dthRecharge,
-      "text": "DTH\nRecharge",
+      "text": "Gas Piped",
       "onTap": () {
         Get.to(() => DthRechargeScreen());
       },
@@ -126,21 +129,21 @@ class Lists {
     },
     {
       "image": Images.creditcard,
-      "text": "Credit Card\nPayment",
+      "text": "Municipal\nServices",
       "onTap": () {
         Get.to(() => CreditCardScreen());
       },
     },
     {
       "image": Images.mobilePostPaid,
-      "text": "Mobile\nPostpaid",
+      "text": "Municipal\nTax",
       "onTap": () {
         Get.to(() => MobileRechargeScreen());
       },
     },
     {
       "image": Images.bookGasCylinder,
-      "text": "Book Gas\nCylinder",
+      "text": "Gas\nCylinder",
       "onTap": () {
         // Get.to(() => CreditCardScreen());
       },
@@ -182,22 +185,22 @@ class Lists {
   static List<Map> ticketBookingList = [
     {
       "image": Images.flightTickets,
-      "text": "Flight\nTickets",
+      "text": "Clubs",
       "onTap": () {
         Get.to(() => DigiwalletTicketTabScreen());
       },
     },
     {
       "image": Images.busTickets,
-      "text": "Bus Tickets",
+      "text": "Education Fees",
     },
     {
       "image": Images.trainTickets,
-      "text": "Train\nTickets",
+      "text": "Hospital",
     },
     {
       "image": Images.movieTickets2,
-      "text": "Movie\nTickets",
+      "text": "Donation",
     },
     {
       "image": Images.creditCard2,
@@ -205,18 +208,18 @@ class Lists {
     },
     {
       "image": Images.eventTickets,
-      "text": "Event\nTickets",
+      "text": "Recurring\nDeposit",
     },
     {
       "image": Images.metroTickets,
-      "text": "Metro Tickets",
+      "text": "Rental\nServices",
       "onTap": () {
         Get.to(() => SelectYourMetroScreen());
       },
     },
     {
       "image": Images.buyFastag,
-      "text": "Buy FASTag",
+      "text": "Subscription",
       "onTap": () {
         Get.to(() => SelectYourFastagScreen());
       },
@@ -249,7 +252,7 @@ class Lists {
     },
     {
       "image": Images.carInsurance,
-      "text": "Car\nInsurance",
+      "text": "Insurance\nService",
     },
     {
       "image": Images.healthInsurance1,
@@ -341,35 +344,42 @@ class Lists {
       "text2": "View your scratchcards, points & other Offers",
     },
     {
+      
       "image": Images.referAndEarn,
       "text1": "Refer & Earn ₹100",
       "text2": "Earn ₹100 cashback every time a friend "
           "makes their 1st payment from Bank A/c "
           "on DigiWallet",
+                "onTap": () {
+        Get.to(() => ReferAndEarnScreen());
+      }
     },
-    {
-      "image": Images.becomeMerchant,
-      "text1": "Become a Merchant",
-      "text2": "Accept payments with DigiWallet Payment "
-          "Gateway, Payment links, QR & much more",
-    },
+    // {
+    //   "image": Images.becomeMerchant,
+    //   "text1": "Become a Merchant",
+    //   "text2": "Accept payments with DigiWallet Payment "
+    //       "Gateway, Payment links, QR & much more",
+    // },
     {
       "image": Images.helpAndSupport,
       "text1": "24X7 Help & Support",
       "text2": "Get quick resolution on queries related to "
           "DigiWallet",
     },
-    {
-      "image": Images.instantPersonalLoan,
-      "text1": "Instant Personal Loan",
-      "text2": "Apply now & get upto ₹3 Lakhs",
-    },
+    // {
+    //   "image": Images.instantPersonalLoan,
+    //   "text1": "Instant Personal Loan",
+    //   "text2": "Apply now & get upto ₹3 Lakhs",
+    // },
     {
       "image": Images.tapToPay,
       "text1": "Tap to Pay",
       "text2": "Activate new or manage existing cards. "
           "Check transaction history for activated "
           "Cards.",
+           "onTap": () {
+        Get.to(() => ScannerScreen());
+      }
     },
     {
       "image": Images.viewQrAndUpiId,
@@ -525,15 +535,15 @@ class Lists {
         Get.to(() => RecentOrderScreen());
       },
     },
-    {
-      "image": Images.digiLocker,
-      "text1": "DigiLocker",
-      "text2":
-          "Access 1000+ documents like PAN, Aadhar, Dl instantly on DigiLocker",
-      "onTap": () {
-        Get.to(() => DigiLockerScreen());
-      },
-    },
+    // {
+    //   "image": Images.digiLocker,
+    //   "text1": "DigiLocker",
+    //   "text2":
+    //       "Access 1000+ documents like PAN, Aadhar, Dl instantly on DigiLocker",
+    //   "onTap": () {
+    //     Get.to(() => DigiLockerScreen());
+    //   },
+    // },
     {
       "image": Images.cashBackAndOffer1,
       "text1": "Cashback & Offers",
@@ -542,14 +552,14 @@ class Lists {
         Get.to(() => CashBackAndOfferScreen());
       },
     },
-    {
-      "image": Images.personalLoan,
-      "text1": "Instant Personal Loan",
-      "text2": "Up to ₹ 3 Lacs in 2 Mins. Apply Now!",
-      "onTap": () {
-        Get.to(() => PersonalLoanScreen());
-      },
-    },
+    // {
+    //   "image": Images.personalLoan,
+    //   "text1": "Instant Personal Loan",
+    //   "text2": "Up to ₹ 3 Lacs in 2 Mins. Apply Now!",
+    //   "onTap": () {
+    //     Get.to(() => PersonalLoanScreen());
+    //   },
+    // },
     {
       "image": Images.policies,
       "text1": "Refer & Earn ₹100",
