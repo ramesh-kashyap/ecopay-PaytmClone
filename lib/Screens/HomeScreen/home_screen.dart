@@ -710,14 +710,22 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
   }
 
   /// List Widget View
-  Widget ListWidgetView() {
-    return ListView.builder(
-      padding: EdgeInsets.only(left: 25, right: 25, top: 20),
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: Lists.listViewList.length,
-      itemBuilder: (context, index) => Padding(
-        padding: EdgeInsets.only(bottom: 7),
+Widget ListWidgetView() {
+  return ListView.builder(
+    padding: EdgeInsets.only(left: 25, right: 25, top: 20),
+    physics: NeverScrollableScrollPhysics(),
+    shrinkWrap: true,
+    itemCount: Lists.listViewList.length,
+    itemBuilder: (context, index) => Padding(
+      padding: EdgeInsets.only(bottom: 7),
+      child: GestureDetector(   // 👈 Wrap with GestureDetector
+        onTap: () {
+          // yaha aap apna action likh sakte ho
+          var onTapAction = Lists.listViewList[index]["onTap"];
+          if (onTapAction != null && onTapAction is Function) {
+            onTapAction();  // 👈 execute karega jo aapne list me diya hai
+          }
+        },
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -729,9 +737,9 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              SvgPicture.asset(
+                SvgPicture.asset(
                   Lists.listViewList[index]["image"],
-                   color: Colors.green,
+                  color: Colors.green,
                 ),
                 SizedBox(width: 12),
                 Expanded(
@@ -757,8 +765,10 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   /// Bottom Widget View
   Widget BottomWidgetView() {
