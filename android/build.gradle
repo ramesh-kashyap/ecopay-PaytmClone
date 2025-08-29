@@ -16,3 +16,11 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+subprojects { project ->
+    if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
+        if (project.android.hasProperty("namespace") == false) {
+            project.android.namespace = "com.example." + project.name
+        }
+    }
+}
