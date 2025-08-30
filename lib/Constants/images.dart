@@ -23,7 +23,7 @@ class Images {
   static const bank = "assets/images/bank.svg";
   static const balanceAndHistory = "assets/images/balanceAndHistory.svg";
   static const wallet = "assets/images/housingSociety.svg";
-  static const carInsurance = "assets/images/InsurenceServices.svg";
+  static const carInsurance = "assets/images/InsuranceServices.svg";
   static const personalLoan = "assets/images/personalLoan.svg";
   static const digitalWalletPostpaid =
       "assets/images/digitalWalletPostpaid.svg";
