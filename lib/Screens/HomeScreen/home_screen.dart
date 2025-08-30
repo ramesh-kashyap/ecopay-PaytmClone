@@ -39,24 +39,32 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
 
 
   void fetchUserName() async {
-                print("Response:sagar");
+  print("Fetching user profile...");
 
-    try {
-      final response = await ApiService.get("/profile");
-            print("Response: $response");
+  try {
+    final response = await ApiService.get("/profile");
+    print("Response: $response");
 
-      final data = response.data;
+    final data = response.data;
 
+    if (data["success"] == true) {
+      final user = data["data"];
       setState(() {
-        userName = data["name"] ?? "Guest User"; 
+        userName = user["name"] ?? "Guest User";
       });
-    } catch (e) {
-      print("Error fetching user profile: $e");
+    } else {
       setState(() {
         userName = "Guest User";
       });
     }
+  } catch (e) {
+    print("Error fetching user profile: $e");
+    setState(() {
+      userName = "Guest User";
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
