@@ -31,25 +31,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void fetchUserProfile() async {
-    try {
-      final response = await ApiService.get("/profile");
-      print("Response: $response");
+  try {
+    final response = await ApiService.get("/profile");
+    print("Response: $response");
 
-      final data = response.data;
+    final resData = response.data;
+
+    if (resData["success"] == true && resData["data"] != null) {
+      final userData = resData["data"];
+
       setState(() {
-        userName = data["name"] ?? "Guest User";
-        userEmail = data["email"] ?? "No Email";
-        userid = data["username"] ?? "No userid";
+        userName = userData["name"] ?? "Guest User";
+        userEmail = userData["email"] ?? "No Email";
+        userid = userData["username"] ?? "No userid";
       });
-    } catch (e) {
-      print("Error fetching user profile: $e");
+    } else {
+      // Agar success false ho
       setState(() {
         userName = "Guest User";
         userEmail = "No Email";
-        userid = "userid";
+        userid = "No userid";
       });
     }
+  } catch (e) {
+    print("Error fetching user profile: $e");
+    setState(() {
+      userName = "Guest User";
+      userEmail = "No Email";
+      userid = "No userid";
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

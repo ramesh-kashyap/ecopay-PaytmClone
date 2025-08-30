@@ -28,29 +28,39 @@ class _UserPaymentCodeScreenState extends State<UserPaymentCodeScreen> {
     fetchUserProfile();
   }
 
-  void fetchUserProfile() async {
-    try {
-      final response = await ApiService.get("/profile");
-      print("Response: $response");
+void fetchUserProfile() async {
+  try {
+    final response = await ApiService.get("/profile");
+    print("Response: $response");
 
-      final data = response.data;
+    final data = response.data;
+
+    if (data["success"] == true) {
+      final user = data["data"]; // yaha user ka object aayega
 
       setState(() {
-        userName = data["name"] ?? "Guest User";
-        userEmail = data["email"] ?? "No Email";
-        userId = data["username"] ?? "No userId";
-
+        userName = user["name"] ?? "Guest User";
+        userEmail = user["email"] ?? "No Email";
+        userId = user["username"] ?? "No userId";
       });
-    } catch (e) {
-      print("Error fetching user profile: $e");
+    } else {
+      // agar success false hoga
       setState(() {
         userName = "Guest User";
         userEmail = "No Email";
         userId = "No userId";
-
       });
     }
+  } catch (e) {
+    print("Error fetching user profile: $e");
+    setState(() {
+      userName = "Guest User";
+      userEmail = "No Email";
+      userId = "No userId";
+    });
   }
+}
+
 
   Future<void> _confirmLogout(BuildContext context) async {
     bool? confirm = await showDialog<bool>(
