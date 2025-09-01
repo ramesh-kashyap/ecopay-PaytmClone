@@ -45,28 +45,7 @@ class PayElectricityBillTabScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25),
-            Container(
-              height: 45,
-              width: Get.width,
-              padding: EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                color: greyF1F,
-                borderRadius: BorderRadius.circular(35),
-              ),
-              child: TabBar(
-                tabs: electricityBillTabController.myTabs,
-                unselectedLabelColor: black171,
-                labelStyle:
-                    TextStyle(fontSize: 16, fontFamily: "InterSemiBold"),
-                unselectedLabelStyle:
-                    TextStyle(fontSize: 16, fontFamily: "InterRegular"),
-                labelColor: white,
-                controller: electricityBillTabController.controller,
-                indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32), color: Colors.green),
-              ),
-            ),
+          
             SizedBox(height: 35),
             Expanded(
               child: TabBarView(

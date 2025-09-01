@@ -1,16 +1,61 @@
-import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
-import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
-import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MobileRechargeScreens/select_your_circle_screen.dart';
-import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MobileRechargeScreens/select_your_postpaid_operator_screen.dart';
-import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
-import 'package:digitalwalletpaytmcloneapp/Utils/lists_view.dart';
-import 'package:digitalwalletpaytmcloneapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
+import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
+import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
+import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
+import 'prepaid_operator_payment_screen.dart';
+import 'select_your_postpaid_operator_screen.dart';
+import 'select_your_circle_screen.dart';
+class SelectYourPrepaidOperatorScreen extends StatefulWidget {
+  const SelectYourPrepaidOperatorScreen({Key? key}) : super(key: key);
 
-class SelectYourPrepaidOperatorScreen extends StatelessWidget {
-  SelectYourPrepaidOperatorScreen({Key? key}) : super(key: key);
+  @override
+  State<SelectYourPrepaidOperatorScreen> createState() =>
+      _SelectYourPrepaidOperatorScreenState();
+}
+
+class _SelectYourPrepaidOperatorScreenState
+    extends State<SelectYourPrepaidOperatorScreen> {
+  bool isLoading = true;
+  List<dynamic> prepaidOperators = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchOperators();
+  }
+
+  Future<void> fetchOperators() async {
+    try {
+      final response = await ApiService.get("/get-operators");
+      final data = response.data;
+
+      List<dynamic> operatorsList = [];
+
+      if (data['success'] == true && data['services'] != null) {
+        for (var service in data['services']) {
+          if (service['serviceType']
+              .toString()
+              .toLowerCase()
+              .contains("prepaid")) {
+            operatorsList.addAll(service['operators']);
+          }
+        }
+      }
+
+      setState(() {
+        prepaidOperators = operatorsList;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      Get.snackbar("Error", "Failed to fetch operators");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,95 +65,69 @@ class SelectYourPrepaidOperatorScreen extends StatelessWidget {
         backgroundColor: white,
         centerTitle: true,
         elevation: 0,
-        automaticallyImplyLeading: false,
         leading: InkWell(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back, size: 20, color: black171),
+          onTap: () => Get.back(),
+          child: Icon(Icons.arrow_back, size: 20, color: Colors.black),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 25),
-            child:SvgPicture.asset(Images.information),
+            child: SvgPicture.asset(Images.information),
           ),
         ],
       ),
-      body: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 22),
-                child: CommonTextWidget.InterBold(
-                  text: "Select your Prepaid Operator",
-                  fontSize: 22,
-                  color: black171,
-                ),
-              ),
-              SizedBox(height: 20),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: Lists.selectYourPrepaidOperatorList.length,
-                padding: EdgeInsets.symmetric(horizontal: 22),
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 16),
-                  child: InkWell(
-                    onTap: (){
-                      Get.to(()=>SelectYourCircleScreen());
-                    },
-                    child: Container(
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: greyE5E, width: 1),
-                        borderRadius: BorderRadius.circular(16),
-                        color: white,
-                      ),
-                      child: ListTile(
-                        leading: Image.asset(
-                            Lists.selectYourPrepaidOperatorList[index]["image"],
-                            height: 45,
-                            width: 45),
-                        title: CommonTextWidget.InterSemiBold(
-                          text: Lists.selectYourPrepaidOperatorList[index]
-                              ["text"],
-                          fontSize: 16,
-                          color: black171,
+      body: isLoading
+          ? Center(child: CircularProgressIndicator(color: Colors.green))
+          : prepaidOperators.isEmpty
+              ? Center(child: Text("No prepaid operators found"))
+              : ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+                  itemCount: prepaidOperators.length,
+                  itemBuilder: (context, index) {
+                    final operator = prepaidOperators[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: InkWell(
+                        onTap: () {
+                          // Pass operator to payment screen
+                          Get.to(() => SelectYourCircleScreen());
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.grey.shade300, width: 1),
+                            borderRadius: BorderRadius.circular(16),
+                            color: white,
+                          ),
+                          child: ListTile(
+                            leading: Icon(Icons.sim_card,
+                                size: 45, color: Colors.green),
+                            title: CommonTextWidget.InterSemiBold(
+                              text: operator['name'] ?? "",
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              ),
-              SizedBox(height: 40),
-              InkWell(
-                onTap: () {
-                  Get.to(() => SelectYourPostpaidOperatorScreen2());
-                },
-                child: Container(
-                  width: Get.width,
-                  color: greyF3F,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 6),
-                    child: Center(
-                      child: CommonTextWidget.InterSemiBold(
-                        text: "I am a Postpaid User",
-                        fontSize: 16,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 30),
-            ],
-          ),
-        ),
-      ),
+      // bottomNavigationBar: InkWell(
+      //   onTap: () {
+      //     Get.to(() => SelectYourPostpaidOperatorScreen2());
+      //   },
+      //   child: Container(
+      //     color: Colors.grey.shade200,
+      //     padding: EdgeInsets.symmetric(vertical: 12),
+      //     child: Center(
+      //       child: Text(
+      //         "I am a Postpaid User",
+      //         style: TextStyle(fontSize: 16, color: Colors.green),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
