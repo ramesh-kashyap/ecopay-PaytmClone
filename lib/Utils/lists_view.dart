@@ -191,6 +191,55 @@ class Lists {
       },
     },
     {
+      "image": Images.balanceAndHistory,
+      "text": "Balance & \nHistory",
+      "onTap": () {
+        Get.to(() => BalanceAndHistoryScreen());
+      }
+    },
+    {
+      "image": Images.wallet,
+      "text": "Housing Society",
+      "onTap": () {
+        Get.to(() => DigiWalletProfileUpdateScreen());
+      }
+    },
+    {
+      "image": Images.carInsurance,
+      "text": "Insurance\nService",
+      "onTap": () {
+        Get.to(() => CarInsuranceScreen());
+      }
+    },
+    {
+      "image": Images.personalLoan,
+      "text": "Loan\nRepayment",
+      "onTap": () {
+        Get.to(() => PersonalLoanScreen());
+      }
+    },
+    {
+      "image": Images.digitalWalletPostpaid,
+      "text": "Postpaid",
+      "onTap": () {
+        Get.to(() => DigiwalletPostPaidScreen());
+      }
+    },
+    {
+      "image": Images.creditcard,
+      "text": "Credit\nCards",
+      "onTap": () {
+        Get.to(() => CreditCardScreen());
+      }
+    },
+    {
+      "image": Images.movieTickets,
+      "text": "Water\nService",
+      "onTap": () {
+        Get.to(() => MovieTicketScreen());
+      }
+    },
+    {
       "image": Images.busTickets,
       "text": "Education Fees",
     },
@@ -222,6 +271,59 @@ class Lists {
       "text": "Subscription",
       "onTap": () {
         Get.to(() => SelectYourFastagScreen());
+      },
+    },
+     {
+      "image": Images.mobileRecharge,
+      "text": "Mobile\nRecharge",
+      "onTap": () {
+        Get.to(() => MobileRechargeScreen());
+      }
+    },
+    {
+      "image": Images.rentViaCreditCard,
+      "text": "Cable TV",
+    },
+    {
+      "image": Images.dthRecharge,
+      "text": "Gas Piped",
+      "onTap": () {
+        Get.to(() => DthRechargeScreen());
+      },
+    },
+    {
+      "image": Images.electricityBill,
+      "text": "Electricity\nBill",
+      "onTap": () {
+        Get.to(() => PayElectricityBillTabScreen());
+      },
+    },
+    {
+      "image": Images.creditcard,
+      "text": "Municipal\nServices",
+      "onTap": () {
+        Get.to(() => CreditCardScreen());
+      },
+    },
+    {
+      "image": Images.mobilePostPaid,
+      "text": "Municipal\nTax",
+      "onTap": () {
+        Get.to(() => MobileRechargeScreen());
+      },
+    },
+    {
+      "image": Images.bookGasCylinder,
+      "text": "Gas\nCylinder",
+      "onTap": () {
+        // Get.to(() => CreditCardScreen());
+      },
+    },
+    {
+      "image": Images.broadBandLandline,
+      "text": "Broadband\nLandline",
+      "onTap": () {
+        // Get.to(() => CreditCardScreen());
       },
     },
   ];
