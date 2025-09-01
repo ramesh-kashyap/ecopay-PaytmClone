@@ -28,6 +28,8 @@ class Images {
   static const digitalWalletPostpaid =
       "assets/images/digitalWalletPostpaid.svg";
   static const creditcard = "assets/images/creditcard.svg";
+  static const String appIcon = "assets/images/app_icon.png";
+
   static const movieTickets = "assets/images/WaterService.svg";
   static const allServices = "assets/images/allServices.svg";
   static const mobileRecharge = "assets/images/mobileRecharge.svg";

@@ -6,9 +6,74 @@ import 'package:digitalwalletpaytmcloneapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
 
-class BalanceAndHistoryScreen extends StatelessWidget {
-  BalanceAndHistoryScreen({Key? key}) : super(key: key);
+
+class BalanceAndHistoryScreen extends StatefulWidget {
+  const BalanceAndHistoryScreen({Key? key}) : super(key: key);
+
+  @override
+  State<BalanceAndHistoryScreen> createState() => _BalanceAndHistoryScreenState();
+}
+
+class _BalanceAndHistoryScreenState extends State<BalanceAndHistoryScreen> {
+  double totalBalance = 0.0; // API se aane wala balance
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBalance();
+  }
+
+  /// 🔹 API call to get balance
+  void fetchBalance() async {
+    try {
+      final response = await ApiService.get("/direct-income");
+      print("Response: $response");
+
+      final data = response.data;
+
+      if (data["success"] == true) {
+        setState(() {
+          totalBalance = double.tryParse(data["balance"].toString()) ?? 0.0;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          totalBalance = 0.0;
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print("Error fetching balance: $e");
+      setState(() {
+        totalBalance = 0.0;
+        isLoading = false;
+      });
+    }
+  }
+
+Widget _buildActionButton(IconData icon, String label) {
+  return Column(
+    children: [
+      CircleAvatar(
+        radius: 28,
+        backgroundColor: Colors.green, // 🔹 Circle green
+        child: Icon(icon, size: 28, color: Colors.white), // 🔹 Icon white
+      ),
+      SizedBox(height: 8),
+      Text(
+        label,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: Colors.black, // 🔹 Text black
+        ),
+      ),
+    ],
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -34,84 +99,169 @@ class BalanceAndHistoryScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 1),
                 CommonTextWidget.InterBold(
                   text: "Account Balance & History",
-                  fontSize: 22,
+                  fontSize: 20,
                   color: black171,
                 ),
                 SizedBox(height: 25),
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  itemCount: Lists.accountBalanceHistoryList.length,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: white,
-                        border: Border.all(color: greyE5E, width: 1),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: whiteF9F,
-                              child: index == 0
-                                  ? Image.asset(
-                                      Lists.accountBalanceHistoryList[index]
-                                          ["image"],
-                                      height: 9,
-                                      width: 36)
-                                  :SvgPicture.asset(
-                                      Lists.accountBalanceHistoryList[index]
-                                          ["image"]),
-                            ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CommonTextWidget.InterSemiBold(
-                                    text: Lists.accountBalanceHistoryList[index]
-                                        ["text1"],
-                                    fontSize: 16,
-                                    color: black171,
-                                  ),
-                                  SizedBox(height: 4),
-                                  CommonTextWidget.InterRegular(
-                                    text: Lists.accountBalanceHistoryList[index]
-                                        ["text2"],
-                                    fontSize: 12,
-                                    color: grey757,
-                                  ),
-                                  SizedBox(height: 4),
-                                  CommonTextWidget.InterBold(
-                                    text: Lists.accountBalanceHistoryList[index]
-                                        ["text3"],
-                                    fontSize: 12,
-                                    color: index == 0 ? black171 : Colors.green,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+
+                // 🔹 Total Balance Card
+               Container(
+   decoration: BoxDecoration(
+    color: Colors.transparent, // 🔹 Background transparent
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(
+      color: Colors.green, // 🔹 Border ka color
+      width: 1,            // 🔹 Border ki thickness
+    ),
+  ),
+  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text(
+        "Total Balance",
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.black, // 🔹 Text black
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      SizedBox(height: 5),
+
+      // 🔹 Balance from API
+      Text(
+        isLoading
+            ? "Loading..."
+            : "₹${totalBalance.toStringAsFixed(2)}", // INR format
+        style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: Colors.black, // 🔹 Balance black
+        ),
+      ),
+
+      SizedBox(height: 20),
+
+      // 🔹 Action Buttons Row
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildActionButton(Icons.arrow_downward, "Withdraw"),
+          _buildActionButton(Icons.send, "Transfer"),
+          _buildActionButton(Icons.add_circle, "Top Up"),
+          _buildActionButton(Icons.account_balance, "Deposit"),
+        ],
+      ),
+    ],
+  ),
+),
+
+
+SizedBox(height: 20),
+
+// 🔹 Modern Banner Section
+Container(
+  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Color(0xFF3D9642), Color(0xFF2E6B31)], // Gradient look
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(20),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.15),
+        blurRadius: 10,
+        offset: Offset(0, 5),
+      ),
+    ],
+  ),
+  padding: EdgeInsets.all(18),
+  child: Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      // 🔹 Left Side Text
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Explore your financial report",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                height: 1.4,
+              ),
+            ),
+            Text(
+              "and see the highlights!",
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                color: Colors.white70,
+                height: 1.4,
+              ),
+            ),
+            SizedBox(height: 12),
+
+            // 🔹 Button Style Text
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                "Learn More",
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF3D9642),
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      // 🔹 Right Side Icon
+      Container(
+        height: 55,
+        width: 55,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 6,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Image.asset(
+            Images.appIcon,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
                 SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CommonTextWidget.InterBold(
-                      text: "Transaction history",
-                      fontSize: 20,
+                      text: "Transaction",
+                      fontSize: 17,
                       color: grey757,
                     ),
                   SvgPicture.asset(Images.search),
