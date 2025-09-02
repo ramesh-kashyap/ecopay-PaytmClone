@@ -18,6 +18,7 @@ import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MobileRechargeScre
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MovieScreens/movie_ticket_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/to_mobile_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/to_self_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/LinkBankAccountScreen/bank_list_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/OrederAndBookingScreens/recent_order_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/PaymentSettingScreen/DigiWalletScreen/digi_wallet_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/PaymentSettingScreen/DigiWalletScreen/payment_limits_screen.dart';
@@ -1364,10 +1365,10 @@ class Lists {
   static List<Map> toBankAccountList = [
     {
       "image": Images.bank,
-      "text1": "Enter Bank A/c\ndetails",
+      "text1": "To Bank A/c\nTransfer",
       "text2": "Choose Bank or enter IFSC details",
       "onTap": () {
-        // Get.to(() => ToMobileScreen());
+        Get.to(() => SelectBankScreen());
       },
     },
     {

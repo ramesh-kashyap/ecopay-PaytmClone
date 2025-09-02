@@ -9,6 +9,7 @@ class CommonTextFieldWidget {
     keyboardType,
     hintText,
     bool obscureText = false,
+    String? Function(String?)? validator,
   }) {
     return TextFormField(
       keyboardType: keyboardType,
@@ -47,6 +48,7 @@ class CommonTextFieldWidget {
             borderRadius: BorderRadius.circular(88),
             borderSide: BorderSide(color: greyA6A, width: 0.5)),
       ),
+       validator: validator,
     );
   }
 
@@ -56,6 +58,7 @@ class CommonTextFieldWidget {
     controller,
     keyboardType,
     hintText,
+    String? Function(String?)? validator,
   }) {
     return TextFormField(
       keyboardType: keyboardType,
@@ -94,6 +97,7 @@ class CommonTextFieldWidget {
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(color: greyF5F, width: 0)),
       ),
+      validator: validator,
     );
   }
 

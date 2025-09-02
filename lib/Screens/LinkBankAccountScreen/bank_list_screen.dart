@@ -1,74 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
 import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_textfeild_widget.dart';
-import 'package:digitalwalletpaytmcloneapp/main.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
-import 'electricity_Bill_screen.dart';
-class SelectBoardScreen extends StatefulWidget {
-  const SelectBoardScreen({Key? key}) : super(key: key);
+import 'add_beneficiary_screen.dart';
+class SelectBankScreen extends StatefulWidget {
+  const SelectBankScreen({Key? key}) : super(key: key);
 
   @override
-  State<SelectBoardScreen> createState() => _SelectBoardScreenState();
+  State<SelectBankScreen> createState() => _SelectBankScreenState();
 }
 
-class _SelectBoardScreenState extends State<SelectBoardScreen> {
+class _SelectBankScreenState extends State<SelectBankScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isLoading = true;
-  List<dynamic> prepaidOperators = [];
-  List<dynamic> filteredCircles = [];
+  List<dynamic> banks = [];
+  List<dynamic> filteredBanks = [];
 
   @override
   void initState() {
     super.initState();
-    fetchOperators();
+    fetchBanks();
 
     searchController.addListener(() {
-      filterStates(searchController.text);
+      filterBanks(searchController.text);
     });
   }
 
-  Future<void> fetchOperators() async {
+  // Fetch banks from Cyrus API
+  Future<void> fetchBanks() async {
     try {
-      final response = await ApiService.get("/get-operators");
+      final response = await ApiService.get("/get-banks");
       final data = response.data;
 
-      List<dynamic> operatorsList = [];
-
-      if (data['success'] == true && data['services'] != null) {
-        for (var service in data['services']) {
-          if (service['serviceType']
-              .toString()
-              .toLowerCase()
-              .contains("electricity")) {
-            operatorsList.addAll(service['operators']);
-          }
-        }
+      if (data['success'] == true && data['banks'] != null) {
+        setState(() {
+          banks = data['banks'];
+          filteredBanks = data['banks'];
+          isLoading = false;
+        });
+      } else {
+        setState(() => isLoading = false);
+        Get.snackbar("Error", "Failed to fetch banks");
       }
-
-      setState(() {
-        prepaidOperators = operatorsList;
-        filteredCircles = operatorsList;
-        isLoading = false;
-      });
     } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      Get.snackbar("Error", "Failed to fetch operators");
+      setState(() => isLoading = false);
+      Get.snackbar("Error", "Failed to fetch banks");
     }
   }
 
-  void filterStates(String query) {
+  // Filter banks by name
+  void filterBanks(String query) {
     if (query.isEmpty) {
-      setState(() => filteredCircles = prepaidOperators);
+      setState(() => filteredBanks = banks);
     } else {
       setState(() {
-        filteredCircles = prepaidOperators
-            .where((item) => item['name']
+        filteredBanks = banks
+            .where((bank) => bank['name']
                 .toString()
                 .toLowerCase()
                 .contains(query.toLowerCase()))
@@ -109,7 +100,7 @@ class _SelectBoardScreenState extends State<SelectBoardScreen> {
                     SizedBox(width: 20),
                     Expanded(
                       child: CommonTextWidget.InterSemiBold(
-                        text: "Select State",
+                        text: "Select Bank",
                         fontSize: 20,
                         color: white,
                       ),
@@ -147,43 +138,47 @@ class _SelectBoardScreenState extends State<SelectBoardScreen> {
                   padding: EdgeInsets.all(15),
                   child: SvgPicture.asset(Images.search, color: Colors.green),
                 ),
-                hintText: "Search State",
+                hintText: "Search Bank",
               ),
             ),
           ),
 
-          // 🌟 List
+          // 🌟 List of banks
           Expanded(
             child: isLoading
                 ? Center(child: CircularProgressIndicator(color: Colors.green))
-                : filteredCircles.isEmpty
+                : filteredBanks.isEmpty
                     ? Center(
                         child: CommonTextWidget.InterMedium(
-                          text: "No states found",
+                          text: "No banks found",
                           fontSize: 16,
                           color: grey757,
                         ),
                       )
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: filteredCircles.length,
+                        itemCount: filteredBanks.length,
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         itemBuilder: (context, index) {
-                          final state = filteredCircles[index];
+                          final bank = filteredBanks[index];
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 14),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(16),
-                              onTap: () {
-                                // 👉 Navigate with state
-                                Get.to(() => ElectricityBillScreen(boardName: state['name'] ?? ""));
-                              },
+                              
+                               onTap: () {
+                                  Get.to(() => AddBeneficiaryScreen(
+                                  bankId: bank['id'].toString(),
+                                  bankName: bank['name'],
+                                  ifsc: bank['ifsc'] ?? "",
+                                    ));
+                                  },
+                              
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   color: white,
-                                  border: Border.all(
-                                      color: greyE5E, width: 1),
+                                  border: Border.all(color: greyE5E, width: 1),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.black.withOpacity(0.05),
@@ -193,17 +188,18 @@ class _SelectBoardScreenState extends State<SelectBoardScreen> {
                                   ],
                                 ),
                                 child: ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundColor:
-                                        Colors.green.withOpacity(0.1),
-                                    child: Icon(Icons.location_on,
-                                        color: Colors.green),
-                                  ),
+                                  leading:CircleAvatar(
+                                          backgroundColor:
+                                              Colors.green.withOpacity(0.1),
+                                          child: Icon(Icons.account_balance,
+                                              color: Colors.green),
+                                        ),
                                   title: CommonTextWidget.InterSemiBold(
-                                    text: state['name'] ?? "",
+                                    text: bank['name'] ?? "",
                                     fontSize: 16,
                                     color: black171,
                                   ),
+                                  subtitle: Text(bank['ifsc'] ?? ""),
                                   trailing: Icon(Icons.arrow_forward_ios,
                                       size: 16, color: Colors.green),
                                 ),
