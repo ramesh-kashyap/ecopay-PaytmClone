@@ -41,7 +41,7 @@ class _SelectStatScreenState extends State<SelectStatScreen> {
   }
     Future<void> fetchCircles() async {
     try {
-      final response = await ApiService.get("/get-circles"); // Backend endpoint
+      final response = await ApiService.get("/get-circles"); 
       final data = response.data;
 
       if (data['success'] == true && data['circles'] != null) {

@@ -9,6 +9,8 @@ import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/FastagScreen/select_your_fastag_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MetroScreen/select_your_metro_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/PayElectricityBillScreens/pay_electricitybill_tab_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/GasCyclinderScreen/cycliner_agency_select_screen.dart';
+
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/balance_and_history_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/car_insurance_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/digiwallet_postpaid_screen.dart';
@@ -145,7 +147,7 @@ class Lists {
       "image": Images.bookGasCylinder,
       "text": "Gas\nCylinder",
       "onTap": () {
-        // Get.to(() => CreditCardScreen());
+        Get.to(() => CyclinerAgencyScreen());
       },
     },
     {
