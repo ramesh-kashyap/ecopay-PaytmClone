@@ -21,6 +21,7 @@ import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MovieScreens/movie
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/to_mobile_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/to_self_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/LinkBankAccountScreen/bank_list_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/LinkBankAccountScreen/show_beneficiary_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/OrederAndBookingScreens/recent_order_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/PaymentSettingScreen/DigiWalletScreen/digi_wallet_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/PaymentSettingScreen/DigiWalletScreen/payment_limits_screen.dart';
@@ -1472,7 +1473,7 @@ class Lists {
       "text1": "To Bank A/c\nTransfer",
       "text2": "Choose Bank or enter IFSC details",
       "onTap": () {
-        Get.to(() => SelectBankScreen());
+        Get.to(() => ShowBeneficiary());
       },
     },
     {
