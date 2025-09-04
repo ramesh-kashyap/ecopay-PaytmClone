@@ -13,6 +13,10 @@ class SelectYourPostpaidOperatorScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Phone number le lo Get.arguments se
+    final args = Get.arguments ?? {};
+    final String? phone = args["phone"];
+
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -29,7 +33,7 @@ class SelectYourPostpaidOperatorScreen2 extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 25),
-            child:SvgPicture.asset(Images.information),
+            child: SvgPicture.asset(Images.information),
           ),
         ],
       ),
@@ -39,6 +43,19 @@ class SelectYourPostpaidOperatorScreen2 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20),
+
+              // 🔹 Yaha Phone Number Show Kar diya
+              if (phone != null && phone.isNotEmpty)
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  child: CommonTextWidget.InterSemiBold(
+                    text: "Phone Number: $phone",
+                    fontSize: 18,
+                    color: Colors.green,
+                  ),
+                ),
+
               SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 22),
@@ -57,8 +74,12 @@ class SelectYourPostpaidOperatorScreen2 extends StatelessWidget {
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.only(bottom: 16),
                   child: InkWell(
-                    onTap: (){
-                      Get.to(()=>SelectYourCircleScreen());
+                    onTap: () {
+                      // ✅ Next page me bhi phone forward ho jayega
+                      Get.to(() => SelectYourCircleScreen(), arguments: {
+                        "operator": Lists.selectYourPostpaidOperator2List[index]["text"],
+                        "phone": phone,
+                      });
                     },
                     child: Container(
                       width: Get.width,
@@ -69,12 +90,12 @@ class SelectYourPostpaidOperatorScreen2 extends StatelessWidget {
                       ),
                       child: ListTile(
                         leading: Image.asset(
-                            Lists.selectYourPostpaidOperator2List[index]["image"],
-                            height: 45,
-                            width: 45),
+                          Lists.selectYourPostpaidOperator2List[index]["image"],
+                          height: 45,
+                          width: 45,
+                        ),
                         title: CommonTextWidget.InterSemiBold(
-                          text: Lists.selectYourPostpaidOperator2List[index]
-                              ["text"],
+                          text: Lists.selectYourPostpaidOperator2List[index]["text"],
                           fontSize: 16,
                           color: black171,
                         ),

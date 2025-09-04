@@ -35,7 +35,7 @@ class EnterDthRechargeDetailScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             CommonTextWidget.InterBold(
-              text: "Enter Connection Details",
+              text: "Enter Details",
               fontSize: 22,
               color: black171,
             ),
@@ -120,7 +120,7 @@ class EnterDthRechargeDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             CommonTextWidget.InterMedium(
-              text: "Customer ID",
+              text: "Account Number",
               fontSize: 14,
               color: black171,
             ),
@@ -134,7 +134,7 @@ class EnterDthRechargeDetailScreen extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text:
-                    "Enter 10 digit Customer ID starting with 3. to locate the customer ID, press the MENU button on your remote. ",
+                    "Account Number starts with 1 and is 7-12 digits long. ",
                 style: TextStyle(
                   fontFamily: FontFamily.InterRegular,
                   fontSize: 12,
