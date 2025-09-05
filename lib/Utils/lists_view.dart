@@ -40,6 +40,7 @@ import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/SearchScreen/search_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/ScannerScreen/scanner_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/CableTv/cable_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MunicipalTax/municipal_screen.dart';
 
 
 
@@ -142,7 +143,7 @@ class Lists {
       "image": Images.creditcard,
       "text": "Municipal\nServices",
       "onTap": () {
-        Get.to(() => CreditCardScreen());
+        Get.to(() => SelectMunicipalScreen());
       },
     },
     {
