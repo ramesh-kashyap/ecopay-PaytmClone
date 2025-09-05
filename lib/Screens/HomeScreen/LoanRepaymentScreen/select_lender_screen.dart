@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
-import 'enter_loan_repayment_screen';
+import 'enter_loan_repayment_screen.dart';
 
 class SelectLenderScreen extends StatefulWidget {
   const SelectLenderScreen({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _SelectLenderScreenState extends State<SelectLenderScreen> {
                     SizedBox(width: 20),
                     Expanded(
                       child: CommonTextWidget.InterSemiBold(
-                        text: "Select Housing Society",
+                        text: "Select Lender",
                         fontSize: 20,
                         color: white,
                       ),
