@@ -39,6 +39,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/SearchScreen/search_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/ScannerScreen/scanner_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/CableTv/cable_screen.dart';
+
 
 
 class Lists {
@@ -118,6 +120,9 @@ class Lists {
     {
       "image": Images.rentViaCreditCard,
       "text": "Cable TV",
+        "onTap": () {
+        Get.to(() => SelectCableScreen());
+      },
     },
     {
       "image": Images.dthRecharge,
