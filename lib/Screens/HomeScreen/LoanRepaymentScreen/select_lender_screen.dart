@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
-import 'enter_society_bill_screen.dart';
+import 'enter_loan_repayment_screen';
 
-class SelectSocietyScreen extends StatefulWidget {
-  const SelectSocietyScreen({Key? key}) : super(key: key);
+class SelectLenderScreen extends StatefulWidget {
+  const SelectLenderScreen({Key? key}) : super(key: key);
 
   @override
-  State<SelectSocietyScreen> createState() => _SelectSocietyScreenState();
+  State<SelectLenderScreen> createState() => _SelectLenderScreenState();
 }
 
-class _SelectSocietyScreenState extends State<SelectSocietyScreen> {
+class _SelectLenderScreenState extends State<SelectLenderScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isLoading = true;
   List<dynamic> prepaidOperators = [];
@@ -44,7 +44,7 @@ class _SelectSocietyScreenState extends State<SelectSocietyScreen> {
           if (service['serviceType']
               .toString()
               .toLowerCase()
-              .contains("housing society")) {
+              .contains("loan repayment")) {
             operatorsList.addAll(service['operators']);
           }
         }
