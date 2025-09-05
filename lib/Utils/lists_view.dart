@@ -14,6 +14,7 @@ import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/HousingSocietyScre
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/Landline/landline_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/LoanRepaymentScreen/select_lender_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/WaterBillScreen/select_provider_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MunicipalServiceScreen/municipal_service_screen.dart';
 
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/balance_and_history_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/car_insurance_screen.dart';
@@ -93,7 +94,7 @@ class Lists {
       "image": Images.movieTickets,
       "text": "Water\nService",
       "onTap": () {
-        Get.to(() => SelectProviderScreen());
+        Get.to(() => SelectProviderScreen1());
       }
     },
     {
@@ -144,7 +145,7 @@ class Lists {
       "image": Images.creditcard,
       "text": "Municipal\nServices",
       "onTap": () {
-        Get.to(() => CreditCardScreen());
+        Get.to(() => MunicipalServiceScreen());
       },
     },
     {

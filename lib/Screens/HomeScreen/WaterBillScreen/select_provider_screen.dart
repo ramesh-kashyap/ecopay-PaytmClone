@@ -9,14 +9,14 @@ import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
 import 'enter_water_bill_screen.dart';
 
-class SelectProviderScreen extends StatefulWidget {
-  const SelectProviderScreen({Key? key}) : super(key: key);
+class SelectProviderScreen1 extends StatefulWidget {
+  const SelectProviderScreen1({Key? key}) : super(key: key);
 
   @override
-  State<SelectProviderScreen> createState() => _SelectProviderScreenState();
+  State<SelectProviderScreen1> createState() => _SelectProviderScreen1State();
 }
 
-class _SelectProviderScreenState extends State<SelectProviderScreen> {
+class _SelectProviderScreen1State extends State<SelectProviderScreen1> {
   final TextEditingController searchController = TextEditingController();
   bool isLoading = true;
   List<dynamic> prepaidOperators = [];
