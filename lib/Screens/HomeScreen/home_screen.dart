@@ -112,7 +112,7 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
           ),
           subtitle: CommonTextWidget.InterBold(
             color: black171,
-            text: "Hello $userName", // ✅ अब backend से aane wala naam
+            text: "Hello $userName", 
             fontSize: 20,
           ),
           trailing: Row(
@@ -161,23 +161,23 @@ final BannerSliderController bannerSliderController = Get.put(BannerSliderContro
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              InkWell(
-                onTap: () {
-                  Get.to(() => ScannerScreen());
-                },
-                child: Column(
-                  children: [
-                  SvgPicture.asset(Images.scanAndPay,color: Colors.green,),
-                    CommonTextWidget.InterSemiBold(
-                      color: black171,
-                      text: "Scan & Pay",
-                      fontSize: 12,
-                    ),
-                  ],
-                ),
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     Get.to(() => ScannerScreen());
+              //   },
+              //   child: Column(
+              //     children: [
+              //     SvgPicture.asset(Images.scanAndPay,color: Colors.green,),
+              //       CommonTextWidget.InterSemiBold(
+              //         color: black171,
+              //         text: "Scan & Pay",
+              //         fontSize: 12,
+              //       ),
+              //     ],
+              //   ),
+              // ),
               InkWell(
                 onTap: () {
                   Get.to(() => ToMobileScreen());
