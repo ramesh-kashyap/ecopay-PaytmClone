@@ -120,7 +120,7 @@ class EnterDthRechargeDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             CommonTextWidget.InterMedium(
-              text: "Account Number",
+              text: "Customer ID",
               fontSize: 14,
               color: black171,
             ),
@@ -134,7 +134,7 @@ class EnterDthRechargeDetailScreen extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text:
-                    "Account Number starts with 1 and is 7-12 digits long. ",
+                    "Please Enter Your 10 digit Customer ID. ",
                 style: TextStyle(
                   fontFamily: FontFamily.InterRegular,
                   fontSize: 12,
