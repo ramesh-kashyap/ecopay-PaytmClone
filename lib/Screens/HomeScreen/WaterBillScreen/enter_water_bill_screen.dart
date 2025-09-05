@@ -7,8 +7,8 @@ import 'package:digitalwalletpaytmcloneapp/Utils/common_textfeild_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EnterLoanRepaymentScreen extends StatelessWidget {
-  EnterLoanRepaymentScreen({Key? key}) : super(key: key);
+class EnterWaterBillScreen extends StatelessWidget {
+  EnterWaterBillScreen({Key? key}) : super(key: key);
   final TextEditingController tvController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
 
