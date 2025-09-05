@@ -1,8 +1,8 @@
 import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
 import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
 import 'package:digitalwalletpaytmcloneapp/Controllers/dth_recharge_controller.dart';
-import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/cabletv_listview_screen.dart';
-import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/dth_listview_screen.dart';
+// import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/cabletv_listview_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/Landline/landline_list_view.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +30,7 @@ class SelectProviderScreen extends StatelessWidget {
           child: Icon(Icons.arrow_back, size: 20, color: black171),
         ),
         title: CommonTextWidget.InterSemiBold(
-          text: "Recharge DTH or TV",
+          text: "Landline",
           fontSize: 18,
           color: black171,
         ),
@@ -97,8 +97,8 @@ Container(
               child: TabBarView(
                 controller: dthRechargeTabController.controller,
                 children: [
-                  DthListviewScreen(),
-                  CableTvListviewScreen(),
+                  LandlineListviewScreen(),
+                  // CableTvListviewScreen(),
                 ],
               ),
             ),
