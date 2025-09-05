@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:digitalwalletpaytmcloneapp/Service/Api.dart';
-import 'enter_loan_repayment_screen.dart';
+import 'enter_water_bill_screen.dart';
 
-class SelectLenderScreen extends StatefulWidget {
-  const SelectLenderScreen({Key? key}) : super(key: key);
+class SelectProviderScreen extends StatefulWidget {
+  const SelectProviderScreen({Key? key}) : super(key: key);
 
   @override
-  State<SelectLenderScreen> createState() => _SelectLenderScreenState();
+  State<SelectProviderScreen> createState() => _SelectProviderScreenState();
 }
 
-class _SelectLenderScreenState extends State<SelectLenderScreen> {
+class _SelectProviderScreenState extends State<SelectProviderScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isLoading = true;
   List<dynamic> prepaidOperators = [];
@@ -44,7 +44,7 @@ class _SelectLenderScreenState extends State<SelectLenderScreen> {
           if (service['serviceType']
               .toString()
               .toLowerCase()
-              .contains("loan repayment")) {
+              .contains("water")) {
             operatorsList.addAll(service['operators']);
           }
         }
@@ -110,7 +110,7 @@ class _SelectLenderScreenState extends State<SelectLenderScreen> {
                     SizedBox(width: 20),
                     Expanded(
                       child: CommonTextWidget.InterSemiBold(
-                        text: "Select Lender",
+                        text: "Select Water Provider",
                         fontSize: 20,
                         color: white,
                       ),
@@ -177,7 +177,7 @@ class _SelectLenderScreenState extends State<SelectLenderScreen> {
                               borderRadius: BorderRadius.circular(16),
                               onTap: () {
                                 // 👉 Navigate with state
-                                Get.to(() => EnterLoanRepaymentScreen());
+                                Get.to(() => EnterWaterBillScreen());
                               },
                               child: Container(
                                 decoration: BoxDecoration(
