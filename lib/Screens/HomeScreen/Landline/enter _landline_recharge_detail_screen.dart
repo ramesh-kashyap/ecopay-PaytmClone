@@ -41,7 +41,7 @@ class EnterLandlineRechargeDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 25),
             CommonTextWidget.InterMedium(
-              text: "Landline Operator",
+              text: "ACT Landline",
               fontSize: 14,
               color: black171,
             ),
@@ -120,7 +120,7 @@ class EnterLandlineRechargeDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             CommonTextWidget.InterMedium(
-              text: "Account Number",
+              text: "Account Number/User Name",
               fontSize: 14,
               color: black171,
             ),

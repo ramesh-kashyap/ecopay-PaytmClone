@@ -30,7 +30,7 @@ class DthRechargeScreen extends StatelessWidget {
           child: Icon(Icons.arrow_back, size: 20, color: black171),
         ),
         title: CommonTextWidget.InterSemiBold(
-          text: "Recharge DTH or TV",
+          text: "Pay Gas Bill",
           fontSize: 18,
           color: black171,
         ),
@@ -70,7 +70,7 @@ Container(
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: "Search Provider",
+            hintText: "Search Piped Gas Provider",
             hintStyle: TextStyle(
               color: Colors.grey,
               fontSize: 14,
@@ -88,7 +88,7 @@ Container(
 
             SizedBox(height: 25),
             CommonTextWidget.InterBold(
-              text: "Recharge DTH or TV",
+              text: "Top Piped Gas Provider",
               fontSize: 20,
               color: black171,
             ),
