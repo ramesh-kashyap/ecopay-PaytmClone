@@ -10,8 +10,8 @@ import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/FastagScreen/selec
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/MetroScreen/select_your_metro_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/PayElectricityBillScreens/pay_electricitybill_tab_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/GasCyclinderScreen/cycliner_agency_select_screen.dart';
+import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/HousingSocietyScreens/select_society_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/Landline/landline_screen.dart';
-
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/balance_and_history_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/car_insurance_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/digiwallet_postpaid_screen.dart';
@@ -53,7 +53,7 @@ class Lists {
       "image": Images.wallet,
       "text": "Housing Society",
       "onTap": () {
-        Get.to(() => DigiWalletProfileUpdateScreen());
+        Get.to(() => SelectSocietyScreen());
       }
     },
     {
