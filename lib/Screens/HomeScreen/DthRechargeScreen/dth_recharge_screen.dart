@@ -1,7 +1,7 @@
 import 'package:digitalwalletpaytmcloneapp/Constants/colors.dart';
 import 'package:digitalwalletpaytmcloneapp/Constants/images.dart';
 import 'package:digitalwalletpaytmcloneapp/Controllers/dth_recharge_controller.dart';
-import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/cabletv_listview_screen.dart';
+// import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/cabletv_listview_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Screens/HomeScreen/DthRechargeScreen/dth_listview_screen.dart';
 import 'package:digitalwalletpaytmcloneapp/Utils/common_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -47,28 +47,45 @@ class DthRechargeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 25),
-            Container(
-              height: 45,
-              width: Get.width,
-              padding: EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                color: greyF1F,
-                borderRadius: BorderRadius.circular(35),
-              ),
-              child: TabBar(
-                tabs: dthRechargeTabController.myTabs,
-                unselectedLabelColor: black171,
-                labelStyle:
-                    TextStyle(fontSize: 16, fontFamily: "InterSemiBold"),
-                unselectedLabelStyle:
-                    TextStyle(fontSize: 16, fontFamily: "InterRegular"),
-                labelColor: white,
-                controller: dthRechargeTabController.controller,
-                indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32),
-                    color: Colors.green),
-              ),
+
+// 🔍 Search Box
+Container(
+  height: 45,
+  width: Get.width,
+  padding: EdgeInsets.symmetric(horizontal: 12),
+  decoration: BoxDecoration(
+    color: greyF1F,
+    borderRadius: BorderRadius.circular(25),
+  ),
+  child: Row(
+    children: [
+      Icon(Icons.search, color: black171, size: 20),
+      SizedBox(width: 10),
+      Expanded(
+        child: TextField(
+          style: TextStyle(
+            color: black171,
+            fontSize: 16,
+            fontFamily: "InterRegular",
+          ),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Search Provider",
+            hintStyle: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
             ),
+          ),
+          onChanged: (value) {
+            // 👇 Yaha aap search filter logic laga sakte ho
+            print("Searching: $value");
+          },
+        ),
+      ),
+    ],
+  ),
+),
+
             SizedBox(height: 25),
             CommonTextWidget.InterBold(
               text: "Recharge DTH or TV",
@@ -81,7 +98,7 @@ class DthRechargeScreen extends StatelessWidget {
                 controller: dthRechargeTabController.controller,
                 children: [
                   DthListviewScreen(),
-                  CableTvListviewScreen(),
+                  // CableTvListviewScreen(),
                 ],
               ),
             ),
